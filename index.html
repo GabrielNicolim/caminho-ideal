@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Simulador de Rotas - Estrutura de Dados</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vis-network@9.1.2/standalone/umd/vis-network.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 min-h-screen antialiased text-gray-800">
+    <div class="max-w-7xl mx-auto p-6">
+        <header class="flex items-center justify-between mb-6">
+            <h1 class="text-2xl font-extrabold text-sky-600">🚚 Simulador de rotas — Estrutura de dados</h1>
+        </header>
+
+        <main class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <section class="lg:col-span-1 space-y-4">
+                <div class="p-4 bg-white rounded-lg shadow">
+                    <h2 class="font-semibold mb-2">➕ Adicionar cidade</h2>
+                    <input id="city-name" class="w-full border rounded p-2 mb-2" placeholder="Nome da cidade (ex: São Paulo)" />
+                    <button id="add-city" class="w-full bg-sky-600 text-white py-2 rounded">Adicionar cidade</button>
+                </div>
+
+                <div class="p-4 bg-white rounded-lg shadow">
+                    <h2 class="font-semibold mb-2">➕ Adicionar estrada</h2>
+                    <select id="road-from" class="w-full border rounded p-2 mb-2"></select>
+                    <select id="road-to" class="w-full border rounded p-2 mb-2"></select>
+                    <input id="road-weight" type="number" min="1" value="10" class="w-full border rounded p-2 mb-2" placeholder="Peso (distância ou tempo)" />
+                    <button id="add-road" class="w-full bg-sky-600 text-white py-2 rounded">Adicionar estrada</button>
+                </div>
+
+                <div class="p-4 bg-white rounded-lg shadow">
+                    <h2 class="font-semibold mb-2">📦 Pedidos</h2>
+                    <select id="pedido-city" class="w-full border rounded p-2 mb-2"></select>
+                    <button id="add-pedido" class="w-full bg-amber-500 text-white py-2 rounded mb-2">Adicionar pedido</button>
+                    <div class="text-sm text-gray-600 mb-2">Pedidos atuais:</div>
+                    <ul id="pedidos-list" class="list-disc list-inside text-sm text-gray-700"></ul>
+                </div>
+
+                <div class="p-4 bg-white rounded-lg shadow">
+                    <h2 class="font-semibold mb-2">🚛 Origem do caminhão</h2>
+                    <select id="origin-city" class="w-full border rounded p-2 mb-2"></select>
+                    <button id="calc-route" class="w-full bg-green-600 text-white py-2 rounded">Calcular rota ótima</button>
+                </div>
+            </section>
+
+            <section class="lg:col-span-2">
+                <div class="p-4 bg-white rounded-lg shadow mb-4">
+                    <div class="flex items-center justify-between mb-3">
+                    <h2 class="font-semibold">🗺️ Mapa / Grafo</h2>
+                    <div class="text-sm text-gray-600">Nós: <span id="node-count">0</span> · Arestas: <span id="edge-count">0</span></div>
+                    </div>
+                    <div id="network"></div>
+                </div>
+
+                <div class="mt-4 flex gap-2 bg-white p-4 rounded-lg shadow">
+                    <button id="clear-graph" class="bg-red-500 text-white px-3 py-2 rounded">Limpar grafo</button>
+                    <button id="auto-sample" class="bg-indigo-600 text-white px-3 py-2 rounded">Gerar exemplo</button>
+                    <button id="fit-view" class="bg-gray-200 px-3 py-2 rounded">Centralizar</button>
+                </div>
+            </section>
+        </main>
+
+        <footer class="mt-6 text-sm text-gray-500">Feito para disciplina de Estrutura de Dados • Heurística TSP (nearest-neighbor) + Dijkstra para caminhos ótimos.</footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
