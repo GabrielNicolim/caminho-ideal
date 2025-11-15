@@ -196,7 +196,7 @@ const network = new vis.Network(container, data, options);
 
 function refreshSelects() {
     const cidades = grafo.getCidades();
-    const selects = ['road-from', 'road-to', 'pedido-city', 'origin-city'];
+    const selects = ['road-from', 'road-to', 'order-city', 'origin-city'];
 
     for (const id of selects) {
         const sel = document.getElementById(id);
@@ -230,7 +230,7 @@ function refreshSelects() {
 const pedidos = [];
 
 function refreshPedidosUI() {
-    const ul = document.getElementById('pedidos-list');
+    const ul = document.getElementById('orders-list');
     if (!ul) return;
     ul.innerHTML = '';
 
@@ -315,8 +315,8 @@ function edgeIdFrom(a, b) {
     return [a, b].sort().join('::');
 }
 
-document.getElementById('add-pedido').addEventListener('click', () => {
-    const cidade = document.getElementById('pedido-city')?.value;
+document.getElementById('add-order').addEventListener('click', () => {
+    const cidade = document.getElementById('order-city')?.value;
     if (!cidade) {
         swal({ title: 'Selecione uma cidade para o pedido.', icon: 'info' });
         return;

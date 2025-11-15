@@ -37,10 +37,11 @@
 
                 <div class="p-4 bg-white rounded-lg shadow">
                     <h2 class="font-semibold mb-2">📦 Pedidos</h2>
-                    <select id="pedido-city" class="w-full border rounded p-2 mb-2"></select>
-                    <button id="add-pedido" class="w-full bg-amber-500 text-white py-2 rounded mb-2">Adicionar pedido</button>
+                    <select id="order-city" class="w-full border rounded p-2 mb-2"></select>
+                    <button id="add-order" class="w-full bg-amber-500 text-white py-2 rounded mb-2">Adicionar pedido</button>
                     <div class="text-sm text-gray-600 mb-2">Pedidos atuais:</div>
-                    <ul id="pedidos-list" class="list-disc list-inside text-sm text-gray-700"></ul>
+                    <div id="no-orders" class="text-sm text-gray-500 mb-2">Nenhum pedido cadastrado.</div>
+                    <ul id="orders-list" class="list-disc list-inside text-sm text-gray-700"></ul>
                 </div>
 
                 <div class="p-4 bg-white rounded-lg shadow">
@@ -70,6 +71,30 @@
         <footer class="mt-6 text-sm text-gray-500">Feito para disciplina de Estrutura de Dados • Heurística TSP (nearest-neighbor) + Dijkstra para caminhos ótimos.</footer>
     </div>
 
-    <script src="app.js"></script>
+        <script src="app.js"></script>
+
+        <script>
+            (function() {
+                        function updateNoOrders() {
+                            const ul = document.getElementById('orders-list');
+                            const msg = document.getElementById('no-orders');
+                            if (!ul || !msg) return;
+                            msg.style.display = ul.children.length === 0 ? 'block' : 'none';
+                        }
+
+                document.addEventListener('DOMContentLoaded', () => {
+                                updateNoOrders();
+                                const ul = document.getElementById('orders-list');
+                    if (ul) {
+                                    const observer = new MutationObserver(updateNoOrders);
+                        observer.observe(ul, { childList: true });
+                    }
+                    // In case app.js updates UI via events without changing DOM immediately,
+                    // ensure we re-check after any click (cheap fallback).
+                                document.addEventListener('click', () => setTimeout(updateNoOrders, 0));
+                });
+            })();
+        </script>
+
 </body>
 </html>
