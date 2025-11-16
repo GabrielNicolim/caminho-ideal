@@ -410,12 +410,22 @@ document.getElementById('calc-route').addEventListener('click', async () => {
         }
 
         const { tour, custo } = res;
+        printRoute(tour);
         highlightRoute(tour);
+        console.log(tour)
     } catch (err) {
         swal('Erro: ' + err.message, { icon: 'error' });
         console.error(err);
     }
 });
+
+function printRoute(tour) {
+
+    const resultado = "🚚 " + tour.map(item => `'${item}'`).join(" → ") + " 🚚";
+
+    document.getElementById("path-found").textContent = resultado;
+
+}
 
 function highlightRoute(tour) {
     for (const e of edges.get()) {
